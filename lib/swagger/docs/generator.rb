@@ -150,8 +150,9 @@ module Swagger
         end
 
         def generate_resource(path, apis, models, settings, root, config)
+          base_path = config[:exclude_api_version_in_path] ? config[:base_path]+'/' : root["basePath"]
           metadata = ApiDeclarationFileMetadata.new(
-            root["apiVersion"], path, root["basePath"],
+            root["apiVersion"], path, base_path,
             settings[:controller_base_path],
             camelize_model_properties: config.fetch(:camelize_model_properties, true),
             swagger_version: root["swaggerVersion"],
