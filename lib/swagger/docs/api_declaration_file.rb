@@ -18,33 +18,15 @@ module Swagger
         resource
       end
 
-      def base_path
-        metadata.base_path
-      end
-
-      def path
-        metadata.path
-      end
-
-      def swagger_version
-        metadata.swagger_version
-      end
-
-      def api_version
-        metadata.api_version
-      end
-
-      def controller_base_path
-        metadata.controller_base_path
-      end
-
-      def camelize_model_properties
-        metadata.camelize_model_properties
-      end
-
-      def authorizations
-        metadata.authorizations
-      end
+      delegate \
+        :base_path,
+        :path,
+        :swagger_version,
+        :api_version,
+        :controller_base_path,
+        :camelize_model_properties,
+        :authorizations,
+        to: :metadata
 
       def resource_path
         demod
