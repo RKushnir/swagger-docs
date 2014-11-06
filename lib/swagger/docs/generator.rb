@@ -333,8 +333,7 @@ module Swagger
 
         def filter_path_params(path, params)
           params.reject do |param|
-            param_as_variable = "{#{param[:name]}}"
-            param[:param_type] == :path && !path.include?(param_as_variable)
+            param[:param_type] == :path && !path.include?("{#{param[:name]}}")
           end
         end
       end
