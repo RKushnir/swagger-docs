@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'swagger/docs/api_declaration_file_metadata'
 
 describe Swagger::Docs::ApiDeclarationFileMetadata do
 

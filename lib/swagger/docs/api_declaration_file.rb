@@ -1,4 +1,5 @@
 require 'swagger/docs/slash_trimmer'
+require 'active_support/core_ext/module/delegation'
 
 module Swagger
   module Docs

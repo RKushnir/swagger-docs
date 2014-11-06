@@ -1,4 +1,9 @@
 require 'swagger/docs/slash_trimmer'
+require 'swagger/docs/methods'
+require 'swagger/docs/impotent_methods'
+require 'swagger/docs/dsl'
+require 'swagger/docs/api_declaration_file_metadata'
+require 'swagger/docs/api_declaration_file'
 
 module Swagger
   module Docs

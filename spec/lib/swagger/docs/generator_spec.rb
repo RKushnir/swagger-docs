@@ -1,13 +1,56 @@
 require 'spec_helper'
+require 'swagger/docs/generator'
+require 'swagger/docs/config'
 
 describe Swagger::Docs::Generator do
+  before do
+    Swagger::Docs::Config.base_api_controller = ApplicationController
+  end
+
+  def generate(config)
+    Swagger::Docs::Generator::write_docs(config)
+  end
+
+  def stub_string_verb_route(verb, action, controller, spec)
+    double("route", verb: verb,
+      defaults: {action: action, controller: controller},
+      path: spec
+    )
+  end
+
+  def stub_route(verb, action, controller, spec)
+    double("route", verb: double("verb", source: verb),
+      defaults: {action: action, controller: controller},
+      path: double("path", spec: spec)
+    )
+  end
+
+  def get_api_paths(apis, path)
+    apis.select {|api| api["path"] == path}
+  end
+
+  def get_api_operations(apis, path)
+    get_api_paths(apis, path).flat_map {|api| api["operations"] }
+  end
+
+  def get_api_operation(apis, path, method)
+    operations = get_api_operations(apis, path)
+    operations.find {|operation| operation["method"] == method.to_s }
+  end
+
+  def get_api_parameter(api, name)
+    api["parameters"].find {|param| param["name"] == name }
+  end
+
+
+  DEFAULT_VER = Swagger::Docs::Generator::DEFAULT_VER
 
   require "fixtures/controllers/application_controller"
   require "fixtures/controllers/ignored_controller"
 
   before(:each) do
     FileUtils.rm_rf(tmp_dir)
-    stub_const('ActionController::Base', ApplicationController)
+    # stub_const('ActionController::Base', ApplicationController)
   end
 
   let(:routes) {[

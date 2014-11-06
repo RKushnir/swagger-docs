@@ -1,4 +1,6 @@
 require 'spec_helper'
+require 'swagger/docs/methods'
+require 'swagger/docs/dsl'
 
 describe Swagger::Docs::Methods do
 

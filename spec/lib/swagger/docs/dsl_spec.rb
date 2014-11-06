@@ -1,8 +1,8 @@
 require 'spec_helper'
+require 'swagger/docs/dsl'
 
 describe Swagger::Docs::SwaggerDSL do
-
-  subject { described_class.new() }
+  subject { described_class.new }
 
   describe "#response" do
     it "adds code, responseModel and message to response_messages" do
@@ -10,6 +10,4 @@ describe Swagger::Docs::SwaggerDSL do
       expect(subject.response_messages).to eq([{code: 500, responseModel: "Tag", message: "Some sample text"}])
     end
   end
-
 end
-

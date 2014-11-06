@@ -1,4 +1,8 @@
-require "spec_helper"
+require 'spec_helper'
+require 'swagger/docs/api_declaration_file'
+require 'swagger/docs/api_declaration_file_metadata'
+require 'active_support/core_ext/string/inflections'
+require 'active_support/core_ext/object/blank'
 
 describe Swagger::Docs::ApiDeclarationFile do
   let(:apis) do
