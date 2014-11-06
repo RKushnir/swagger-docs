@@ -129,13 +129,15 @@ module Swagger
 
         def process_path(path, root, config, settings)
           return {action: :skipped, reason: :empty_path} if path.empty?
-          klass = Config.log_exception { "#{path.to_s.camelize}Controller".constantize } rescue nil
+          controller_name = "#{path.to_s.camelize}Controller"
+          klass = Config.log_exception { controller_name.constantize } rescue nil
 
           if !klass
             return {action: :skipped, path: path, reason: :klass_not_present}
           end
 
-          if !klass.methods.include?(:swagger_config) or !klass.swagger_config[:controller]
+          if !klass.methods.include?(:swagger_config) ||
+              !klass.swagger_config[:controller]
             return {action: :skipped, path: path, reason: :not_swagger_resource}
           end
 
