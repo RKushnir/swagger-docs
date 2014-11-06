@@ -6,11 +6,11 @@ module Swagger
 
       DEFAULT_VER = "1.0"
       DEFAULT_CONFIG = {
-        :api_file_path => "public/",
-        :api_file_name => "api-docs.json",
-        :base_path => "/",
-        :clean_directory => false,
-        :formatting => :pretty
+        api_file_path:   "public/",
+        api_file_name:   "api-docs.json",
+        base_path:       "/",
+        clean_directory: false,
+        formatting:      :pretty
       }
 
       class << self
@@ -64,10 +64,10 @@ module Swagger
             "apiVersion" => api_version,
             "swaggerVersion" => "1.2",
             "basePath" => settings[:base_path] + "/",
-            :apis => [],
-            :authorizations => settings[:authorizations]
+            apis: [],
+            authorizations: settings[:authorizations]
           }
-          results = {:processed => [], :skipped => []}
+          results = {processed: [], skipped: []}
           resources = []
 
           get_route_paths(settings[:controller_base_path]).each do |path|
@@ -178,7 +178,7 @@ module Swagger
           api_path = transform_spec_to_api_path(route_path, settings[:controller_base_path], config[:api_extension_type])
           operations[:parameters] = filter_path_params(api_path, operations[:parameters]) if operations[:parameters]
 
-          apis << {:path => api_path, :operations => [operations]}
+          apis << {path: api_path, operations: [operations]}
           models = get_klass_models(klass)
 
           {apis: apis, models: models, nickname: nickname}

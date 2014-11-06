@@ -32,7 +32,7 @@ describe Swagger::Docs::Generator do
   context "without controller base path" do
     let(:config) {
       {
-        DEFAULT_VER => {:api_file_path => "#{tmp_dir}", :base_path => "http://api.no.where"}
+        DEFAULT_VER => {api_file_path: tmp_dir.to_s, base_path: "http://api.no.where"}
       }
     }
     before(:each) do
@@ -58,8 +58,9 @@ describe Swagger::Docs::Generator do
         let(:api_file_name) { 'swagger-docs.json' }
         let(:config) {{
           DEFAULT_VER => {
-            :api_file_path => tmp_dir,
-            :api_file_name => api_file_name }
+            api_file_path: tmp_dir,
+            api_file_name: api_file_name
+          }
         }}
         let(:file_resources) { tmp_dir + api_file_name }
         specify { expect(File.exists? file_resources).to be true }
@@ -92,9 +93,9 @@ describe Swagger::Docs::Generator do
 
   context "with controller base path" do
     let(:config) { Swagger::Docs::Config.register_apis({
-       DEFAULT_VER => {:controller_base_path => "api/v1", :api_file_path => "#{tmp_dir}", :base_path => "http://api.no.where",
-       :attributes => {
-          :info => {
+       DEFAULT_VER => {controller_base_path: "api/v1", api_file_path: tmp_dir.to_s, base_path: "http://api.no.where",
+       attributes: {
+          info: {
             "title" => "Swagger Sample App",
             "description" => "This is a sample description.",
             "termsOfServiceUrl" => "http://helloreverb.com/terms/",
@@ -102,7 +103,7 @@ describe Swagger::Docs::Generator do
             "license" => "Apache 2.0",
             "licenseUrl" => "http://www.apache.org/licenses/LICENSE-2.0.html"
          }
-        } 
+        }
       }
     })}
     let(:file_resource) { tmp_dir + 'sample.json' }

@@ -4,26 +4,26 @@ describe Swagger::Docs::ApiDeclarationFile do
   let(:apis) do
     [
       {
-        :path=>"sample/{id}",
-        :operations=>[
+        path: "sample/{id}",
+        operations: [
           {
-            :summary=>"Updates an existing User",
-            :parameters=>[
-              {:param_type=>:path, :name=>:id, :type=>:integer, :description=>"User Id", :required=>true},
-              {:param_type=>:form, :name=>:first_name, :type=>:string, :description=>"First name", :required=>false},
-              {:param_type=>:form, :name=>:last_name, :type=>:string, :description=>"Last name", :required=>false},
-              {:param_type=>:form, :name=>:email, :type=>:string, :description=>"Email address", :required=>false},
-              {:param_type=>:form, :name=>:tag, :type=>:Tag, :description=>"Tag object", :required=>true}
+            summary: "Updates an existing User",
+            parameters: [
+              {param_type: :path, name: :id, type: :integer, description: "User Id", required: true},
+              {param_type: :form, name: :first_name, type: :string, description: "First name", required: false},
+              {param_type: :form, name: :last_name, type: :string, description: "Last name", required: false},
+              {param_type: :form, name: :email, type: :string, description: "Email address", required: false},
+              {param_type: :form, name: :tag, type: :Tag, description: "Tag object", required: true}
             ],
-            :response_messages=>[
-              {:code=>401, :message=>"Unauthorized"},
-              {:code=>404, :message=>"Not Found"},
-              {:code=>406, :message=>"Not Acceptable"}
+            response_messages: [
+              {code: 401, message: "Unauthorized"},
+              {code: 404, message: "Not Found"},
+              {code: 406, message: "Not Acceptable"}
             ],
-            :notes=>"Only the given fields are updated.",
-            :method=>:put,
-            :nickname=>"Api::V1::Sample#update",
-            :consumes=>["application/json", "text/xml"]
+            notes: "Only the given fields are updated.",
+            method: :put,
+            nickname: "Api::V1::Sample#update",
+            consumes: ["application/json", "text/xml"]
           }
         ]
       }
@@ -32,17 +32,15 @@ describe Swagger::Docs::ApiDeclarationFile do
 
   let(:models) do
     {
-      :Tag=>
-      {
-        :id=>:Tag,
-        :required=>[:id],
-        :properties=>
-        {
-          :id=>{:type=>:integer, :description=>"User Id"},
-          :first_name=>{:type=>:string, :description=>"First Name"},
-          :last_name=>{:type=>:string, :description=>"Last Name"}
+      Tag: {
+        id: :Tag,
+        required: [:id],
+        properties: {
+          id: {type: :integer, description: "User Id"},
+          first_name: {type: :string, description: "First Name"},
+          last_name: {type: :string, description: "Last Name"}
         },
-        :description=>"A Tag object."
+        description: "A Tag object."
       }
     }
   end
@@ -62,7 +60,7 @@ describe Swagger::Docs::ApiDeclarationFile do
         "basePath"=> declaration.base_path,
         "apis"=> declaration.apis,
         "resourcePath"=> declaration.resource_path,
-        :models=> declaration.models,
+        models: declaration.models,
         "resourceFilePath" => declaration.resource_file_path,
         "authorizations" => {}
       }

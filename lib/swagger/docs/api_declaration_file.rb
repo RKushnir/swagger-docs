@@ -14,7 +14,7 @@ module Swagger
       def generate_resource
         resource = build_resource_root_hash
         # Add the already-normalized models to the resource.
-        resource = resource.merge({:models => models}) if models.present?
+        resource = resource.merge(models: models) if models.present?
         resource
       end
 

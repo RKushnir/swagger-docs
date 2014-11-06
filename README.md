@@ -50,18 +50,18 @@ Create an initializer in config/initializers (e.g. swagger_docs.rb) and define y
 Swagger::Docs::Config.register_apis({
   "1.0" => {
     # the extension used for the API
-    :api_extension_type => :json,
+    api_extension_type: :json,
     # the output location where your .json files are written to
-    :api_file_path => "public/api/v1/",
+    api_file_path: "public/api/v1/",
     # the URL base path to your API
-    :base_path => "http://api.somedomain.com",
+    base_path: "http://api.somedomain.com",
     # if you don't pass API version in URL
     # :exclude_api_version_in_path => true,
     # if you want to delete all .json files at each generation
-    :clean_directory => false,
+    clean_directory: false,
     # add custom attributes to api-docs
-    :attributes => {
-      :info => {
+    attributes: {
+      info: {
         "title" => "Swagger Sample App",
         "description" => "This is a sample description.",
         "termsOfServiceUrl" => "http://helloreverb.com/terms/",
