@@ -123,20 +123,6 @@ module Swagger
           SlashTrimmer.trim_slashes(api_path)
         end
 
-        def camelize_keys_deep!(h)
-          h.keys.each do |k|
-            ks    = k.to_s.camelize(:lower)
-            h[ks] = h.delete k
-            camelize_keys_deep! h[ks] if h[ks].kind_of? Hash
-            if h[ks].kind_of? Array
-              h[ks].each do |a|
-                next unless a.kind_of? Hash
-                camelize_keys_deep! a
-              end
-            end
-          end
-        end
-
         def get_debased_path(path, controller_base_path)
           path.gsub("#{controller_base_path}", "")
         end
