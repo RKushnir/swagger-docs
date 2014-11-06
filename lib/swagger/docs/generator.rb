@@ -21,6 +21,7 @@ module Swagger
         def write_docs(apis = nil)
           results = generate_docs(apis)
           results.each {|api_version, result| write_doc(result) }
+          results
         end
 
         def write_doc(result)
