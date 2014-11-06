@@ -7,8 +7,9 @@ module Swagger
         instance = new
         instance.instance_eval(&block)
         # Now return all of the set instance variables as a Hash
-        instance.instance_variables.inject({}) { |result_hash, instance_variable|
-          result_hash[instance_variable] = instance.instance_variable_get(instance_variable)
+        instance.instance_variables.inject({}) {|result_hash, instance_variable|
+          result_hash[instance_variable] = instance.
+            instance_variable_get(instance_variable)
           result_hash # Gotta have the block return the result_hash
         }
       end
@@ -42,13 +43,22 @@ module Swagger
       end
 
       def param(param_type, name, type, required, description = nil, hash={})
-        parameters << {param_type: param_type, name: name, type: type,
-          description: description, required: required == :required}.merge(hash)
+        parameters << {
+          param_type:  param_type,
+          name:        name,
+          type:        type,
+          description: description,
+          required:    required == :required,
+        }.merge(hash)
       end
 
       # helper method to generate enums
-      def param_list(param_type, name, type, required, description = nil, allowed_values = [], hash = {})
-        hash.merge!({allowable_values: {value_type: "LIST", values: allowed_values}})
+      def param_list(param_type, name, type, required, description = nil,
+          allowed_values = [], hash = {})
+        hash.merge!(allowable_values: {
+          value_type: "LIST",
+          values:     allowed_values,
+        })
         param(param_type, name, type, required, description, hash)
       end
 
@@ -59,11 +69,20 @@ module Swagger
       def response(status, text = nil, model = nil)
         if status.is_a? Symbol
           status_code = Rack::Utils.status_code(status)
-          response_messages << {code: status_code, responseModel: model, message: text || status.to_s.titleize}
+          response_messages << {
+            code:          status_code,
+            responseModel: model,
+            message:       text || status.to_s.titleize,
+          }
         else
-          response_messages << {code: status, responseModel: model, message: text}
+          response_messages << {
+            code:          status,
+            responseModel: model,
+            message:       text,
+          }
         end
-        response_messages.sort_by!{|i| i[:code]}
+
+        response_messages.sort_by! {|i| i[:code] }
       end
     end
 
@@ -77,7 +96,7 @@ module Swagger
         instance.instance_eval(&block)
         instance.id = model_name
         # Now return all of the set instance variables as a Hash
-        instance.instance_variables.inject({}) { |result_hash, instance_var_name|
+        instance.instance_variables.inject({}) {|result_hash, instance_var_name|
           key = instance_var_name[1..-1].to_sym  # Strip prefixed @ sign.
           result_hash[key] = instance.instance_variable_get(instance_var_name)
           result_hash # Gotta have the block return the result_hash
@@ -98,9 +117,10 @@ module Swagger
 
       def property(name, type, required, description = nil, hash={})
         properties[name] = {
-          type: type,
+          type:        type,
           description: description,
         }.merge!(hash)
+
         self.required << name if required == :required
       end
     end

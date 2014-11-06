@@ -7,8 +7,8 @@ module Swagger
 
       def initialize(metadata, apis, models)
         @metadata = metadata
-        @apis = camelize_keys_deep apis
-        @models = models
+        @apis     = camelize_keys_deep apis
+        @models   = models
       end
 
       def generate_resource

@@ -1,7 +1,6 @@
 module Swagger
   module Docs
     module ImpotentMethods
-
       def self.included(base)
         base.extend ClassMethods
       end
@@ -18,7 +17,6 @@ module Swagger
         def swagger_controller(controller, description)
         end
       end
-
     end
   end
 end
