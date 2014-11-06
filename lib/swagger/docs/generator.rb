@@ -306,7 +306,7 @@ module Swagger
         end
 
         def create_output_paths(api_file_path)
-          FileUtils.mkdir_p(api_file_path) # recursively create out output path
+          FileUtils.mkdir_p(api_file_path)
         end
 
         def clean_output_paths(api_file_path)
