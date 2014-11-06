@@ -301,7 +301,7 @@ module Swagger
         end
 
         def get_route_paths(controller_base_path)
-          paths = routes.map {|i| "#{i.defaults[:controller]}" }
+          paths = routes.map {|i| i.defaults[:controller].to_s }
           paths.uniq.select {|i| i.start_with?(controller_base_path) }
         end
 
