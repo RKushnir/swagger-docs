@@ -72,54 +72,6 @@ describe Swagger::Docs::ApiDeclarationFile do
     end
   end
 
-  describe "#base_path" do
-    it "returns metadata.base_path" do
-      metadata = double("metadata", base_path: "/hello")
-      declaration = described_class.new(metadata, apis, models)
-      expect(declaration.base_path).to eq(metadata.base_path)
-    end
-  end
-
-  describe "#path" do
-    it "returns metadata.path" do
-      metadata = double("metadata", path: "/hello")
-      declaration = described_class.new(metadata, apis, models)
-      expect(declaration.path).to eq(metadata.path)
-    end
-  end
-
-  describe "#controller_base_path" do
-    it "returns metadata.controller_base_path" do
-      metadata = double("metadata", controller_base_path: "/hello")
-      declaration = described_class.new(metadata, apis, models)
-      expect(declaration.controller_base_path).to eq(metadata.controller_base_path)
-    end
-  end
-
-  describe "#swagger_version" do
-    it "returns metadata.swagger_version" do
-      metadata = double("metadata", swagger_version: "1.2")
-      declaration = described_class.new(metadata, apis, models)
-      expect(declaration.swagger_version).to eq(metadata.swagger_version)
-    end
-  end
-
-  describe "#api_version" do
-    it "returns metadata.api_version" do
-      metadata = double("metadata", api_version: "1.0")
-      declaration = described_class.new(metadata, apis, models)
-      expect(declaration.api_version).to eq(metadata.api_version)
-    end
-  end
-
-  describe "#camelize_model_properties" do
-    it "returns metadata.camelize_model_properties" do
-      metadata = double("metadata", camelize_model_properties: false)
-      declaration = described_class.new(metadata, apis, models)
-      expect(declaration.camelize_model_properties).to eq(metadata.camelize_model_properties)
-    end
-  end
-
   describe "#models" do
     context "with camelize_model_properties set to true" do
       it "returns a models hash that's ready for output" do
